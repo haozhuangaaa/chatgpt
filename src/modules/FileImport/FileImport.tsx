@@ -1,88 +1,89 @@
-// import React, { useState } from 'react';
+import React, { useState } from 'react';
 
-// export function FileImport() {
-//   const [file, setFile] = useState();
-//   const [array, setArray] = useState([]);
+function FileImport() {
+  const [file, setFile] = useState();
+  const [array, setArray] = useState([]);
 
-//   const fileReader = new FileReader();
+  const fileReader = new FileReader();
 
-//   const handleOnChange = (e) => {
-//     setFile(e.target.files[0]);
-//   };
+  const handleOnChange = (e) => {
+    setFile(e.target.files[0]);
+  };
 
-//   const csvFileToArray = (string) => {
-//     const csvHeader = string.slice(0, string.indexOf('\n')).split(',');
-//     const csvRows = string.slice(string.indexOf('\n') + 1).split('\n');
+  const csvFileToArray = (string) => {
+    const csvHeader = string.slice(0, string.indexOf('\n')).split(',');
+    const csvRows = string.slice(string.indexOf('\n') + 1).split('\n');
 
-//     const arrayResults = csvRows.map((i) => {
-//       const values = i.split(',');
-//       const obj = csvHeader.reduce((object, header, index) => {
-//         // eslint-disable-next-line no-param-reassign
-//         object[header] = values[index];
-//         return object;
-//       }, {});
-//       return obj;
-//     });
+    const arrayResults = csvRows.map((i) => {
+      const values = i.split(',');
+      const obj = csvHeader.reduce((object, header, index) => {
+        // eslint-disable-next-line no-param-reassign
+        object[header] = values[index];
+        return object;
+      }, {});
+      return obj;
+    });
 
-//     setArray(arrayResults);
-//   };
+    setArray(arrayResults);
+  };
 
-//   const handleOnSubmit = (e) => {
-//     e.preventDefault();
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
 
-//     if (file) {
-//       fileReader.onload = function (event) {
-//         const text = event.target.result;
-//         csvFileToArray(text);
-//       };
+    if (file) {
+      fileReader.onload = function (event) {
+        const text = event.target.result;
+        csvFileToArray(text);
+      };
 
-//       fileReader.readAsText(file);
-//     }
-//   };
+      fileReader.readAsText(file);
+    }
+  };
 
-//   const headerKeys = Object.keys(Object.assign({}, ...array));
+  const headerKeys = Object.keys(Object.assign({}, ...array));
 
-//   return (
-//     <div style={{ textAlign: 'center' }}>
-//       <h1>File Import </h1>
-//       <form>
-//         <input
-//           type={'file'}
-//           id={'csvFileInput'}
-//           accept={'.csv'}
-//           onChange={handleOnChange}
-//         />
+  return (
+    <div style={{ textAlign: 'center' }}>
+      <h1>File Import </h1>
+      <form>
+        <input
+          type={'file'}
+          id={'csvFileInput'}
+          accept={'.csv'}
+          onChange={handleOnChange}
+        />
 
-//         <button
-//           onClick={(e) => {
-//             handleOnSubmit(e);
-//           }}
-//         >
-//           IMPORT CSV
-//         </button>
-//       </form>
+        <button
+          onClick={(e) => {
+            handleOnSubmit(e);
+          }}
+        >
+          IMPORT CSV
+        </button>
+      </form>
 
-//       <br />
+      <br />
 
-//       <table>
-//         <thead>
-//           <tr key={'header'}>
-//             {headerKeys.map((key, index) => (
-//               <th key={index}>{key}</th>
-//             ))}
-//           </tr>
-//         </thead>
+      <table>
+        <thead>
+          <tr key={'header'}>
+            {headerKeys.map((key, index) => (
+              <th key={index}>{key}</th>
+            ))}
+          </tr>
+        </thead>
 
-//         <tbody>
-//           {array.map((item) => (
-//             <tr key={item.id}>
-//               {Object.values(item).map((val: any, index) => (
-//                 <td key={index}>{val}</td>
-//               ))}
-//             </tr>
-//           ))}
-//         </tbody>
-//       </table>
-//     </div>
-//   );
-// }
+        <tbody>
+          {array.map((item) => (
+            <tr key={item.id}>
+              {Object.values(item).map((val: any, index) => (
+                <td key={index}>{val}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+export default FileImport;
