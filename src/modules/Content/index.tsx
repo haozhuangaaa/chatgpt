@@ -6,6 +6,7 @@ import { hasMathJax, initMathJax, renderMaxJax } from '@utils/markdown';
 import { hasMath } from '@utils';
 import MessageInput from './MessageInput';
 import ContentHeader from './ContentHeader';
+import FileUpload from '../FileImport/FileUpload';
 
 interface ContentProps {
   setActiveSetting: ReactSetState<boolean>;
@@ -261,6 +262,7 @@ const Content: FC<ContentProps> = ({ setActiveSetting }) => {
 
   return (
     <div className="flex flex-col h-full w-full">
+      <FileUpload></FileUpload>
       <ContentHeader
         conversation={conversation}
         setActiveSetting={setActiveSetting}
